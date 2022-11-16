@@ -12,9 +12,9 @@ INSTRUCTIONS FOR USE:
 
 where <name:tag> is the name:tag you wish to call the image.
 
-2) To find the created image, 
+2) To find the created image, run:
 
-run: >docker images
+>docker images
 
 3) To use the created image, run: 
 
@@ -31,3 +31,9 @@ where <image name> is the name of your created image.
 >docker run -v /var/run/docker.sock:/var/run/docker.sock -v <your output dir>:/output --privileged -t --rm singularityware/docker2singularity <image name>
 
 where <your output dir> is the place where you want to store the singularity image.
+
+6) To run this singularity image in a shell, do:
+
+>singularity shell --nv -B <data location>:/data <singularity image name>
+
+where <data location> is the path to a directory containing the data which you wish to process, and <singularity image name> os the name of the singularity image created in step 5.
