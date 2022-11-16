@@ -1,7 +1,7 @@
 NOTES:
 Author: C. Walker @ 16/11/2022
 This docker environment contains software necessary for analysing LOFT-e data.
-
+On Charlie's machine, this git repository is stored at: /Users/c.walker/LOFTe_Docker/
 ---
 
 INSTRUCTIONS FOR USE:
