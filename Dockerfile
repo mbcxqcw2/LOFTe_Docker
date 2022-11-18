@@ -11,7 +11,7 @@
 #where <your output dir> is the place where you want to store the singularity image.
 
 
-FROM ubuntu
+FROM ubuntu:16.04
 
 ###################################
 #Install necessary system packages#
