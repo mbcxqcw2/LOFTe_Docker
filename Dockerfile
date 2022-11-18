@@ -35,6 +35,12 @@ RUN pip install --upgrade pip
 #Install required packages#
 ###########################
 
+#numpy
+RUN pip install numpy
+
+#matplotlib
+RUN pip install matplotlib
+
 #baseband by Marten van Kerkwijk
 RUN git clone https://github.com/mhvk/baseband
 RUN pip install -e baseband/
