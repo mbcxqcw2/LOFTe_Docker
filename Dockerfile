@@ -41,6 +41,9 @@ RUN pip install numpy
 #matplotlib
 RUN pip install matplotlib
 
+#pyqt5 (for ipython gui backend)
+RUN pip install pyqt5
+
 #baseband by Marten van Kerkwijk
 RUN git clone https://github.com/mhvk/baseband
 RUN pip install -e baseband/
