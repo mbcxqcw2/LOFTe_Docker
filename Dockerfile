@@ -48,28 +48,14 @@ RUN apt-get -y install libfftw3-single3
 #fitsio (for DSPSR)
 RUN apt-get -y install libcfitsio-dev
 
-#Install python version 3.9
+####################################################
+#Install python version 3.9, necessary for baseband#
+####################################################
 #FROM python:3.9.7
-#from: https://stackoverflow.com/questions/70866415/how-to-install-python-specific-version-on-docker
+
+#code adapted from: https://stackoverflow.com/questions/70866415/how-to-install-python-specific-version-on-docker
 #and: https://dev.to/grigorkh/fix-tzdata-hangs-during-docker-image-build-4o9m
 #and: https://stackoverflow.com/questions/56135497/can-i-install-python-3-7-in-ubuntu-18-04-without-having-python-3-6-in-the-system
-
-#RUN apt update -y
-#RUN apt upgrade -y
-#RUN apt-get install -y wget build-essential checkinstall  libreadline-gplv2-dev  libncursesw5-dev  libssl-dev  libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
-#WORKDIR /usr/src
-#RUN wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz
-#RUN tar xzf Python-3.9.7.tgz
-#WORKDIR /usr/src/Python-3.9.7
-#RUN ./configure --enable-optimizations
-#RUN make altinstall
-#WORKDIR /
-
-#RUN apt-get update && \
-#    apt-get install -y software-properties-common && \
-#    add-apt-repository -y ppa:deadsnakes/ppa && \
-#    apt-get update && \
-#    apt install -y python3.9
 
 RUN apt-get install -y curl
 
