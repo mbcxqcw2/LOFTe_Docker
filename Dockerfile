@@ -14,6 +14,12 @@
 #FROM ubuntu:16.04
 FROM nvidia/cuda:11.2.0-devel-ubuntu18.04
 
+#timezone for updating apt
+#from: https://dev.to/grigorkh/fix-tzdata-hangs-during-docker-image-build-4o9m
+
+ENV TZ=Europe/London
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 ###################################
 #Install necessary system packages#
 ###################################
@@ -42,12 +48,50 @@ RUN apt-get -y install libfftw3-single3
 #fitsio (for DSPSR)
 RUN apt-get -y install libcfitsio-dev
 
-#Declare python version
-FROM python:3.9.7
+#Install python version 3.9
+#FROM python:3.9.7
+#from: https://stackoverflow.com/questions/70866415/how-to-install-python-specific-version-on-docker
+#and: https://dev.to/grigorkh/fix-tzdata-hangs-during-docker-image-build-4o9m
+#and: https://stackoverflow.com/questions/56135497/can-i-install-python-3-7-in-ubuntu-18-04-without-having-python-3-6-in-the-system
+
+#RUN apt update -y
+#RUN apt upgrade -y
+#RUN apt-get install -y wget build-essential checkinstall  libreadline-gplv2-dev  libncursesw5-dev  libssl-dev  libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+#WORKDIR /usr/src
+#RUN wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz
+#RUN tar xzf Python-3.9.7.tgz
+#WORKDIR /usr/src/Python-3.9.7
+#RUN ./configure --enable-optimizations
+#RUN make altinstall
+#WORKDIR /
+
+#RUN apt-get update && \
+#    apt-get install -y software-properties-common && \
+#    add-apt-repository -y ppa:deadsnakes/ppa && \
+#    apt-get update && \
+#    apt install -y python3.9
+
+RUN apt-get install -y curl
+
+RUN apt update && \
+    apt install --no-install-recommends -y build-essential software-properties-common && \
+    add-apt-repository -y ppa:deadsnakes/ppa && \
+    apt install --no-install-recommends -y python3.9 python3.9-dev python3.9-distutils && \
+    apt clean && rm -rf /var/lib/apt/lists/*
+
+# Register the version in alternatives (and set higher priority to 3.7)
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 2
+
+# Upgrade pip to latest version
+RUN curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python3 get-pip.py --force-reinstall && \
+    rm get-pip.py
 
 #Install and upgrade pip
-RUN pip install --upgrade pip
-
+#RUN apt-get -y install python3-pip
+#RUN pip3 install --upgrade pip
+#RUN pip3 install --upgrade setuptools
 
 ###################################
 #Install necessary python packages#
@@ -63,8 +107,9 @@ RUN pip install matplotlib
 RUN pip install pyqt5
 
 #baseband by Marten van Kerkwijk
+#RUN pip install astropy==5.0
 RUN git clone https://github.com/mhvk/baseband
-RUN pip install -e baseband/
+RUN pip3 install baseband/
 
 #######################################
 #Install vdifil filterbanking software#
@@ -77,23 +122,23 @@ RUN git clone https://github.com/mbcxqcw2/LOFTe_vdifil
 #########################################
 
 #Pull tempo2 from: https://bitbucket.org/psrsoft/tempo2/src/master/
-RUN git clone https://bitbucket.org/psrsoft/tempo2.git
+#RUN git clone https://bitbucket.org/psrsoft/tempo2.git
 
 #go to tempo2 directory
-WORKDIR tempo2/
+#WORKDIR tempo2/
 
 #Build according to: https://bitbucket.org/psrsoft/tempo2/src/master/
-RUN ./bootstrap
-RUN cp -r T2runtime /usr/share/tempo2/
-RUN export TEMPO2=/usr/share/tempo2/
-RUN apt-get update
-RUN apt-get install -y gfortran
-RUN ./configure F77=gfortran
-RUN make && make install
-RUN make plugins && make plugins-install
+#RUN ./bootstrap
+#RUN cp -r T2runtime /usr/share/tempo2/
+#RUN export TEMPO2=/usr/share/tempo2/
+#RUN apt-get update
+#RUN apt-get install -y gfortran
+#RUN ./configure F77=gfortran
+#RUN make && make install
+#RUN make plugins && make plugins-install
 
 #go back to main directory
-WORKDIR /
+#WORKDIR /
 
 ######################################
 #Install psrcat (needed for PSRCHIVE)#
