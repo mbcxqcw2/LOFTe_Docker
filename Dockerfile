@@ -11,7 +11,8 @@
 #where <your output dir> is the place where you want to store the singularity image.
 
 
-FROM ubuntu:16.04
+#FROM ubuntu:16.04
+FROM nvidia/cuda:11.2.0-devel-ubuntu18.04
 
 ###################################
 #Install necessary system packages#
@@ -20,8 +21,22 @@ FROM ubuntu:16.04
 #Make sure we are in the main working directory...
 WORKDIR /
 
-#install packages
+#update apt-get
 RUN apt-get update -y
+
+#install cuda stuff
+#adapted from: https://github.com/NVIDIA/nvidia-docker/issues/675
+#and: https://gitlab.com/nvidia/container-images/samples/-/blob/master/cuda/archive/ubuntu16.04/cuda-samples/Dockerfile
+
+#RUN apt-get update && apt-get install -y --no-install-recommends \
+#        cuda-samples-$CUDA_PKG_VERSION && \
+#    rm -rf /var/lib/apt/lists/*
+
+
+#WORKDIR /
+
+
+#install other packages
 RUN apt-get -y install cmake
 RUN apt-get -y install git
 RUN apt-get -y install gcc
