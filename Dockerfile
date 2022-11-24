@@ -24,18 +24,6 @@ WORKDIR /
 #update apt-get
 RUN apt-get update -y
 
-#install cuda stuff
-#adapted from: https://github.com/NVIDIA/nvidia-docker/issues/675
-#and: https://gitlab.com/nvidia/container-images/samples/-/blob/master/cuda/archive/ubuntu16.04/cuda-samples/Dockerfile
-
-#RUN apt-get update && apt-get install -y --no-install-recommends \
-#        cuda-samples-$CUDA_PKG_VERSION && \
-#    rm -rf /var/lib/apt/lists/*
-
-
-#WORKDIR /
-
-
 #install other packages
 RUN apt-get -y install cmake
 RUN apt-get -y install git
@@ -77,6 +65,12 @@ RUN pip install pyqt5
 #baseband by Marten van Kerkwijk
 RUN git clone https://github.com/mhvk/baseband
 RUN pip install -e baseband/
+
+#######################################
+#Install vdifil filterbanking software#
+#######################################
+
+RUN git clone https://github.com/mbcxqcw2/LOFTe_vdifil
 
 #########################################
 #Install TEMPO2 (necessary for PSRCHIVE)#
