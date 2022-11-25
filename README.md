@@ -5,7 +5,7 @@ On Charlie's machine, this git repository is stored at: /Users/c.walker/LOFTe_Do
 
 ---
 
-DEPENDENCIES INSTALLED:
+# DEPENDENCIES INSTALLED:
 I.e. the software this Dockerfile installs:
 
 - CUDA (more info to come)
