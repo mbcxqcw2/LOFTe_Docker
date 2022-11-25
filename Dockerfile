@@ -14,8 +14,10 @@
 #FROM ubuntu:16.04
 FROM nvidia/cuda:11.2.0-devel-ubuntu18.04
 
-#timezone for updating apt
-#from: https://dev.to/grigorkh/fix-tzdata-hangs-during-docker-image-build-4o9m
+MAINTAINER Charles Walker "cwalker@mpifr-bonn.mpg.de"
+
+#Declare a timezone for when we update apt
+#Adapted from: https://dev.to/grigorkh/fix-tzdata-hangs-during-docker-image-build-4o9m
 
 ENV TZ=Europe/London
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -74,11 +76,6 @@ RUN curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
     python3 get-pip.py --force-reinstall && \
     rm get-pip.py
 
-#Install and upgrade pip
-#RUN apt-get -y install python3-pip
-#RUN pip3 install --upgrade pip
-#RUN pip3 install --upgrade setuptools
-
 ###################################
 #Install necessary python packages#
 ###################################
@@ -93,15 +90,29 @@ RUN pip install matplotlib
 RUN pip install pyqt5
 
 #baseband by Marten van Kerkwijk
-#RUN pip install astropy==5.0
 RUN git clone https://github.com/mhvk/baseband
 RUN pip3 install baseband/
+
+#LOFTe_parseVex for parsing .vex files
+RUN git clone https://github.com/mbcxqcw2/LOFTe_parseVex
+ENV PYTHONPATH "${PYTHONPATH}:/LOFTe_parseVex"
 
 #######################################
 #Install vdifil filterbanking software#
 #######################################
 
+#Download from github
 RUN git clone https://github.com/mbcxqcw2/LOFTe_vdifil
+
+#Enter directory and make
+WORKDIR LOFTe_vdifil/
+RUN nvcc -o vdifil -std=c++11 vdifil.cu -lcufft
+
+#Add location of vdifil to path
+ENV PATH="${PATH}:/LOFTe_vdifil"
+
+#Return to main directory
+WORKDIR /
 
 #########################################
 #Install TEMPO2 (necessary for PSRCHIVE)#
