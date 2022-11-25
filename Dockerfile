@@ -95,7 +95,7 @@ RUN pip3 install baseband/
 
 #LOFTe_parseVex for parsing .vex files
 RUN git clone https://github.com/mbcxqcw2/LOFTe_parseVex
-ENV PYTHONPATH "${PYTHONPATH}:/LOFTe_parseVex"
+ENV PYTHONPATH "${PYTHONPATH}:/LOFTe_parseVex" #add to python path
 
 #######################################
 #Install vdifil filterbanking software#
