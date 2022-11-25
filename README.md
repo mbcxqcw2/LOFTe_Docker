@@ -5,6 +5,19 @@ On Charlie's machine, this git repository is stored at: /Users/c.walker/LOFTe_Do
 
 ---
 
+DEPENDENCIES INSTALLED:
+I.e. the software this Dockerfile installs:
+
+- CUDA (more info to come)
+- C++11
+- numpy
+- astropy
+- LOFTe_parseVex: https://github.com/mbcxqcw2/LOFTe_parseVex (and dependencies)
+- LOFTe_vdifil: https://github.com/mbcxqcw2/LOFTe_vdifil (and dependencies)
+- baseband: https://github.com/mhvk/baseband (and dependencies)
+
+---
+
 # INSTRUCTIONS FOR USE:
 
 1) To build this dockerfile into an image, run: 
