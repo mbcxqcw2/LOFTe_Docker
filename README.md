@@ -18,9 +18,9 @@ I.e. the software this Dockerfile installs:
 
 ---
 
-# INSTRUCTIONS FOR USE:
+# 1) INSTRUCTIONS FOR BUILDING AN IMAGE:
 
-1) To build this dockerfile into an image, run: 
+1.1) To build this dockerfile into a docker image, run: 
 
 ```
 >docker build -t <name:tag> .
@@ -28,27 +28,14 @@ I.e. the software this Dockerfile installs:
 
 where `<name:tag>` is the name:tag you wish to call the image.
 
-2) To find the created image, run:
+1.2) To find the created image, run:
 
 ```
 >docker images
-```
-
-3) To use the created image, run: 
 
 ```
->docker run --rm -ti <image name> bash
-```
 
-where `<image name>` is the name of your created image.
-
-4) To mount directories while running the image, run: 
-
-```
->docker run --rm -ti -v <LOCATION>/:<LOCATION>/:... <image name> bash
-```
-
-5) To turn the created image into a singularity image, run: 
+1.3) To turn the created image into a singularity image, run: 
 
 ```
 >docker run -v /var/run/docker.sock:/var/run/docker.sock -v <your output dir>:/output --privileged -t --rm singularityware/docker2singularity <image name>
@@ -56,10 +43,59 @@ where `<image name>` is the name of your created image.
 
 where `<your output dir>` is the place where you want to store the singularity image.
 
-6) To run this singularity image in a shell, do:
+---
+
+# 2) INSTRUCTIONS FOR RUNNING AN IMAGE:
+
+
+2.1) To use the created image with docker, run: 
+
+```
+>docker run --rm -ti <image name> bash
+```
+
+where `<image name>` is the name of your created image.
+
+2.2) To mount directories while using the image with docker, run: 
+
+```
+>docker run --rm -ti -v <LOCATION>/:<LOCATION>/:... <image name> bash
+```
+
+2.3) To run this singularity image in a shell, do:
 
 ```
 >singularity shell --nv -B <data location>:/data <singularity image name>
 ```
 
-where `<data location>` is the path to a directory containing the data which you wish to process, and `<singularity image name>` is the name of the singularity image created in step 5.
+where `<data location>` is the path to a directory containing the data which you wish to process, and `<singularity image name>` is the name of the singularity image created in step 3.
+
+---
+
+# 3) INSTRUCTIONS FOR FILTERBANKING e-MERLIN `.VDIF` DATA USING AN IMAGE:
+
+3.1) Within the image, navigate to the mounted directory containing the data you wish to process, e.g.:
+
+```
+>cd /data/
+```
+(assuming a singularity image run using step 2.3.)
+
+3.2) Open ipython, generate a filterbank header file, split the .vdif file into separate polarisations, and exit ipython, e.g.:
+
+```
+>ipython
+>import vdifil_headers as vh
+>import vdifil_splitter as vs
+>vh.make_vdifil_header('<vdif_file.vdif>','<vex_file.vex>','<header_filename.dat>')
+>vs.split_vdif_file('<vdif_file.vdif>')
+>exit()
+```
+where `<vdif_file.vdif>` is the .vdif file to be filterbanked, `<vex_file.vex>` is the observation's corresponding .vex file, and `<header_filename.dat>` is the name of the header file which will be built. The input .vdif file will be split into two separate polarisations with the names `<vdif_file_pol0.vdif>` and `<vdif_file_pol1.vdif>`. See the LOFTe_vdifil package for more info.
+
+3.3) Run the filterbanking software, e.g.:
+
+```
+>vdifil -a <vdif_file_pol0.vdif> -b <vdif_file_pol1.vdif> -o /data/<filterbank_filename.fil> -c <header_filename.dat> -s 
+```
+where `<filterbank_filename.fil> will be the filename of the filterbank file to be created. See the LOFTe_vdifil package for more info.
