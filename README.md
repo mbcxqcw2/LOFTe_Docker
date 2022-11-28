@@ -62,13 +62,13 @@ where `<image name>` is the name of your created image.
 >docker run --rm -ti -v <LOCATION>/:<LOCATION>/:... <image name> bash
 ```
 
-2.3) To run this singularity image in a shell, do:
+2.3) To run the singularity image in a shell, do:
 
 ```
 >singularity shell --nv -B <data location>:/data <singularity image name>
 ```
 
-where `<data location>` is the path to a directory containing the data which you wish to process, and `<singularity image name>` is the name of the singularity image created in step 3.
+where `<data location>` is the path to a directory containing the data which you wish to process, and `<singularity image name>` is the name of the singularity image created in step 1.3.
 
 ---
 
