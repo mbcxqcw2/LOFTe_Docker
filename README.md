@@ -91,11 +91,11 @@ where `<data location>` is the path to a directory containing the data which you
 >vs.split_vdif_file('<vdif_file.vdif>')
 >exit()
 ```
-where `<vdif_file.vdif>` is the .vdif file to be filterbanked, `<vex_file.vex>` is the observation's corresponding .vex file, and `<header_filename.dat>` is the name of the header file which will be built. The input .vdif file will be split into two separate polarisations with the names `<vdif_file_pol0.vdif>` and `<vdif_file_pol1.vdif>`. See the LOFTe_vdifil package for more info.
+where `<vdif_file.vdif>` is the .vdif file to be filterbanked, `<vex_file.vex>` is the observation's corresponding .vex file, and `<header_filename.dat>` is the name of the header file which will be built. The input .vdif file will be split into two separate polarisations with the names `<vdif_file_pol0.vdif>` and `<vdif_file_pol1.vdif>`. For more information on the .vdif header and splitting software, see the LOFTe_vdifil package linked in the list of dependencies.
 
 3.3) Run the filterbanking software, e.g.:
 
 ```
 >vdifil -a <vdif_file_pol0.vdif> -b <vdif_file_pol1.vdif> -o /data/<filterbank_filename.fil> -c <header_filename.dat> -s 
 ```
-where `<filterbank_filename.fil> will be the filename of the filterbank file to be created. See the LOFTe_vdifil package for more info.
+where `<filterbank_filename.fil> is the filename of the filterbank file which you wish to create. For more information on the filterbanking software, see the LOFTe_vdifil package linked in the list of dependencies.
