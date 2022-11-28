@@ -98,4 +98,4 @@ where `<vdif_file.vdif>` is the .vdif file to be filterbanked, `<vex_file.vex>` 
 ```
 >vdifil -a <vdif_file_pol0.vdif> -b <vdif_file_pol1.vdif> -o /data/<filterbank_filename.fil> -c <header_filename.dat> -s 
 ```
-where `<filterbank_filename.fil> is the filename of the filterbank file which you wish to create. For more information on the filterbanking software, see the LOFTe_vdifil package linked in the list of dependencies.
+where `<filterbank_filename.fil>` is the filename of the filterbank file which you wish to create. For more information on the filterbanking software, see the LOFTe_vdifil package linked in the list of dependencies.
