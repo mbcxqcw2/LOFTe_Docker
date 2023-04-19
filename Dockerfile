@@ -96,6 +96,9 @@ RUN pip3 install baseband/
 #sigpyproc by Ewan Barr
 RUN pip install git+https://github.com/telegraphic/sigpyproc
 
+#PRESTO by Scott Ransom
+RUN git clone git://github.com/scottransom/presto.git
+
 #LOFTe_parseVex for parsing .vex files
 RUN git clone https://github.com/mbcxqcw2/LOFTe_parseVex
 

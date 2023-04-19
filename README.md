@@ -16,6 +16,7 @@ I.e. the software this Dockerfile installs:
 - LOFTe_vdifil: https://github.com/mbcxqcw2/LOFTe_vdifil (and dependencies)
 - baseband: https://github.com/mhvk/baseband (and dependencies)
 - sigpyproc: https://github.com/ewanbarr/sigpyproc (and dependencies)
+- presto: https://github.com/scottransom/presto (and dependencies)
 
 ---
 
