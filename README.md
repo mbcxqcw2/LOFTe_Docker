@@ -134,3 +134,5 @@ where `<filterbank_filename.fil>` is the filename of the filterbank file which y
 >ClipFilFast(file_to_clip,output_name,out_path,bitswap,True,sigclip,toload_samps,n_cores,proc_remainder)
 ```
 
+For more information on the ClipPy RFI mitigation software, see the ClipPy package linked in the list of dependencies.
+
