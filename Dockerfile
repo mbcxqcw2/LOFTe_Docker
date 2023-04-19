@@ -98,6 +98,8 @@ RUN pip install git+https://github.com/telegraphic/sigpyproc
 
 #PRESTO by Scott Ransom
 RUN git clone https://github.com/scottransom/presto
+#note: we don't really need to install all of PRESTO, just add the python directory to our pythonpath
+ENV PYTHONPATH="${PYTHONPATH}/presto/python"
 
 #LOFTe_parseVex for parsing .vex files
 RUN git clone https://github.com/mbcxqcw2/LOFTe_parseVex
