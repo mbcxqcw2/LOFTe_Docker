@@ -15,6 +15,7 @@ I.e. the software this Dockerfile installs:
 - LOFTe_parseVex: https://github.com/mbcxqcw2/LOFTe_parseVex (and dependencies)
 - LOFTe_vdifil: https://github.com/mbcxqcw2/LOFTe_vdifil (and dependencies)
 - baseband: https://github.com/mhvk/baseband (and dependencies)
+- sigpyproc: https://github.com/ewanbarr/sigpyproc (and dependencies)
 
 ---
 
