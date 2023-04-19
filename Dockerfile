@@ -133,7 +133,7 @@ WORKDIR /
 #download from github
 RUN git clone https://github.com/mbcxqcw2/ClipPy
 #add location of ClipPy to python path
-ENV PYTHONPATH="${PYTHONPATH}:/ClipPy$"
+ENV PYTHONPATH="${PYTHONPATH}:/ClipPy"
 
 #########################################
 #Install TEMPO2 (necessary for PSRCHIVE)#
