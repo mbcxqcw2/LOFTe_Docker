@@ -17,6 +17,7 @@ I.e. the software this Dockerfile installs:
 - baseband: https://github.com/mhvk/baseband (and dependencies)
 - sigpyproc: https://github.com/ewanbarr/sigpyproc (and dependencies)
 - presto: https://github.com/scottransom/presto (Note: don't need to install, just need to have its python scripts in our python path to use presto.sigproc.read_hdr_val())
+- ClipPy: https://github.com/mbcxqcw2/ClipPy (and dependencies)
 
 ---
 
@@ -101,3 +102,35 @@ where `<vdif_file.vdif>` is the .vdif file to be filterbanked, `<vex_file.vex>` 
 >vdifil -a <vdif_file_pol0.vdif> -b <vdif_file_pol1.vdif> -o /data/<filterbank_filename.fil> -c <header_filename.dat> -s 
 ```
 where `<filterbank_filename.fil>` is the filename of the filterbank file which you wish to create. For more information on the filterbanking software, see the LOFTe_vdifil package linked in the list of dependencies.
+
+---
+
+# 4) INSTRUCTIONS FOR RFI-MITIGATING A FILTERBANK FILE USING CLIPPY
+
+4.1) Within, e.g., ipython, import the RFI clipping software. This is either `ClipFil` for single-core processing, or `ClipFilFast` for a faster, parallel-processing version:
+
+```
+>from clip_filterbanks_2 import ClipFil
+>from clip_filterbanks_2 import ClipFilFast
+```
+
+4.2) Declare your clipping inputs, e.g.:
+
+```
+>file_to_clip = '/my/location/filterbank_file.fil' #The name, location of filterbank file to clip
+>output_name = 'clipped.fil' #The name of the output clipped filterbank file
+>out_path = '/my/new/location/' #The directory to place the output file
+>bitswap = False #keep the output filterbank file the same bit rate as the input file
+>sigclip = 3. #The threshold to use when performing the RFI clipping
+>toload_samps = 40000 #The number of samples to load at once for clipping
+>n_cores = 13 #The number of cores to use when using the parallelised ClipFilFast() function
+>proc_remainder = False #Option to process remaining samples which do not neatly fit into an integer number of toload_samps. Note: If set to TRUE, may affect output S/N. Read ClipPy documentation for more info.
+```
+
+4.3) Perform the RFI clipping, e.g:
+
+```
+>ClipFil(file_to_clip,output_name,out_path,bitswap,True,sigclip,toload_samps,proc_remainder)
+>ClipFilFast(file_to_clip,output_name,out_path,bitswap,True,sigclip,toload_samps,n_cores,proc_remainder)
+```
+
