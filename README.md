@@ -11,9 +11,10 @@ I.e. the software this Dockerfile installs:
 - CUDA (more info to come)
 - C++11
 - numpy
-- astropy
+- astropy: https://github.com/astropy/astropy (and dependencies)
 - LOFTe_parseVex: https://github.com/mbcxqcw2/LOFTe_parseVex (and dependencies)
 - LOFTe_vdifil: https://github.com/mbcxqcw2/LOFTe_vdifil (and dependencies)
+- LOFTe_Incoherent: https://github.com/mbcxqcw2/LOFTe_Incoherent (and dependencies)
 - baseband: https://github.com/mhvk/baseband (and dependencies)
 - sigpyproc: https://github.com/ewanbarr/sigpyproc (and dependencies)
 - presto: https://github.com/scottransom/presto (Note: don't need to install, just need to have its python scripts in our python path to use presto.sigproc.read_hdr_val())

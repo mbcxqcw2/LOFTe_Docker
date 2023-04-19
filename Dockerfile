@@ -135,6 +135,15 @@ RUN git clone https://github.com/mbcxqcw2/ClipPy
 #add location of ClipPy to python path
 ENV PYTHONPATH="${PYTHONPATH}:/ClipPy"
 
+################################################
+#Install LOFT-e incoherent beamforming software#
+################################################
+
+#download from github
+RUN git clone https://github.com/mbcxqcw2/LOFTe_Incoherent
+#add location of software to python path
+ENV PYTHONPATH="${PYTHONPATH}:/LOFTe_Incoherent"
+
 #########################################
 #Install TEMPO2 (necessary for PSRCHIVE)#
 #########################################
