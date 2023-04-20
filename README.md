@@ -147,7 +147,7 @@ For more information on the ClipPy RFI mitigation software, see the ClipPy packa
 >from Incoherent_9 import CombineFils
 ```
 
-5.2) Then declare the clipping inputs, e.g.:
+5.2) Then declare the combination inputs, e.g.:
 
 ```
 >mode = 'i' #the method for incoherently combining dishes
@@ -159,7 +159,7 @@ For more information on the ClipPy RFI mitigation software, see the ClipPy packa
 >fil_names = ['fil_1.fil','fil_2.fil','fil_3.fil'] #filterbank files to be incoherently combined.
 ```
 
-Note: Clipping modes can be `'i'` (incoherent), `'m'` (median) or `'mf'` (median filter).
+Note: Combination modes can be `'i'` (incoherent), `'m'` (median) or `'mf'` (median filter).
 
 5.3) Run `CombineFils()`, e.g.:
 
