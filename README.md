@@ -137,3 +137,34 @@ where `<filterbank_filename.fil>` is the filename of the filterbank file which y
 
 For more information on the ClipPy RFI mitigation software, see the ClipPy package linked in the list of dependencies.
 
+---
+
+# 5) INSTRUCTIONS FOR INCOHERENT BEAMFORMING FILTERBANK FILES
+
+5.1) To combine two or more filterbank files, in, e.g., ipython, import the combination software:
+
+```
+>from Incoherent_9 import CombineFils
+```
+
+5.2) Then declare the clipping inputs, e.g.:
+
+```
+>mode = 'i' #the method for incoherently combining dishes
+>outname = 'output_file.fil' #the name of the output filterbank file
+>outloc = '/my/output/location/' #the directory in which to place the output file
+>bitswap = False #keep the output filterbank file the same bit rate as the input file
+>rficlip = False #legacy option. Always keep as false
+>clipsig = 3.
+>fil_names = ['fil_1.fil','fil_2.fil','fil_3.fil'] #filterbank files to be incoherently combined.
+```
+
+Note: Clipping modes can be `'i'` (incoherent), `'m'` (median) or `'mf'` (median filter).
+
+5.3) Run `CombineFils()`, e.g.:
+
+```
+>CombineFils(mode,outname,outloc,bitswap,rficlip,clipsig,fil_names)
+```
+
+For more detailed information on the incoherent beamformer, see the documentation of the LOFTe_Incoherent package linked in the list of dependencies. 
